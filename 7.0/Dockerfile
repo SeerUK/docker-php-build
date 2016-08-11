@@ -13,6 +13,7 @@ RUN set -x \
     && LC_ALL=en_US.UTF-8 apt-add-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
+        git-core \
         php7.0 \
         php7.0-cli \
         php7.0-common \

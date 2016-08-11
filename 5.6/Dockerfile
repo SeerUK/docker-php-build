@@ -13,6 +13,7 @@ RUN set -x \
     && LC_ALL=en_US.UTF-8 apt-add-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
+        git-core \
         php5.6 \
         php5.6-cli \
         php5.6-common \
