@@ -14,6 +14,7 @@ RUN set -x \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         git-core \
+        openssh-client \
         php5.6 \
         php5.6-cli \
         php5.6-common \
