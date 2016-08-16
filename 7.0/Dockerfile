@@ -1,20 +1,37 @@
 FROM ubuntu:xenial
 MAINTAINER Elliot Wright <hello@elliotdwright.com>
 
-# Install PHP
+COPY provisioning/docker-entrypoint.sh /opt/php-setup/docker-entrypoint.sh
+
+ENV GOSU_VERSION 1.9
+ENV LC_ALL en_US.UTF-8
+ENV PHP_UID 1000
+ENV PHP_GID 1000
+ENV PHP_HOME /home/php
+ENV PHP_WORKDIR /app
+
 RUN set -x \
-    && useradd -u 1000 -m -s /bin/bash php \
-    && mkdir -p /app \
-    && chown -R php: /app \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        language-pack-en-base \
-        software-properties-common \
-    && LC_ALL=en_US.UTF-8 apt-add-repository ppa:ondrej/php \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
         git-core \
+        language-pack-en-base \
         openssh-client \
+        software-properties-common \
+        wget \
+    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
+    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true \
+    && apt-add-repository ppa:ondrej/php \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
         php7.0 \
         php7.0-cli \
         php7.0-common \
@@ -31,6 +48,11 @@ RUN set -x \
         php7.0-zip \
     && apt-get autoremove \
     && apt-get clean \
-    && rm -rf /var/lib/app/lists/*
+    && rm -rf /var/lib/app/lists/* \
+    && chmod +x /opt/php-setup/docker-entrypoint.sh
 
-CMD php -v
+WORKDIR /opt/php-setup
+
+ENTRYPOINT ["/opt/php-setup/docker-entrypoint.sh"]
+
+CMD ["php", "-v"]

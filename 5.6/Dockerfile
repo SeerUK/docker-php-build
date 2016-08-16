@@ -51,7 +51,7 @@ RUN set -x \
     && rm -rf /var/lib/app/lists/* \
     && chmod +x /opt/php-setup/docker-entrypoint.sh
 
-WORKDIR /opt/jenkins-slave-setup
+WORKDIR /opt/php-setup
 
 ENTRYPOINT ["/opt/php-setup/docker-entrypoint.sh"]
 
