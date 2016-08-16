@@ -4,7 +4,6 @@ MAINTAINER Elliot Wright <hello@elliotdwright.com>
 COPY provisioning/docker-entrypoint.sh /opt/php-setup/docker-entrypoint.sh
 
 ENV GOSU_VERSION 1.9
-ENV LC_ALL en_US.UTF-8
 ENV PHP_UID 1000
 ENV PHP_GID 1000
 ENV PHP_HOME /home/php
@@ -29,7 +28,7 @@ RUN set -x \
     && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
-    && apt-add-repository ppa:ondrej/php \
+    && LC_ALL=en_US.UTF-8 apt-add-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         php5.6 \
