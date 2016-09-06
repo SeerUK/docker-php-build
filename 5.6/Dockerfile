@@ -44,6 +44,7 @@ RUN set -x \
         php5.6-mcrypt \
         php5.6-memcached \
         php5.6-mysql \
+        php5.6-xml \
         php5.6-zip \
     && apt-get autoremove \
     && apt-get clean \
