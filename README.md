@@ -21,5 +21,5 @@ Feel free to open a [pull request][2], or file an [issue][3] on Github. I always
 If you're unsure about anything, feel free to ask about it in an issue before you get your heart set on fixing it yourself.
 
 [1]: https://hub.docker.com/r/seeruk/php-build/
-[2]: https://github.com/SeerUK/docker-jenkins-slave/pulls
-[3]: https://github.com/SeerUK/docker-jenkins-slave/issues
+[2]: https://github.com/SeerUK/docker-php-build/pulls
+[3]: https://github.com/SeerUK/docker-php-build/issues
