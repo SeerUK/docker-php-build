@@ -44,4 +44,6 @@ echo "    Done!"
 
 echo "==> Running CMD..."
 
+cd "${PHP_WORKDIR}"
+
 exec gosu php "$@"

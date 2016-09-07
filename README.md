@@ -3,6 +3,16 @@ Docker PHP Build
 
 Docker image packaging for a PHP, designed for build environments. Available on the [Docker Hub][1].
 
+Usage
+-----
+
+The following environment variables are available to allow you to configure how the container will run, and various options within it:
+
+* **PHP_UID**: Allows you to configure the UID of the `php` user within the container. This is set via the container entrypoint. (Default: 1000)
+* **PHP_GID**: Allows you to configure the GID of the `php` user within the container. This is set via the container entrypoint. (Default: 1000)
+* **PHP_HOME**: Allows you to configure the home directory of the `php` user within the container. (Default: /home/php)
+* **PHP_WORKDIR**: This will specify the directory that the CMD will be executed in. This is set via the container entrypoint. (Default: /opt/www)
+
 Notes
 -----
 
