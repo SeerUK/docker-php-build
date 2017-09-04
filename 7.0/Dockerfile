@@ -3,7 +3,7 @@ MAINTAINER Elliot Wright <hello@elliotdwright.com>
 
 COPY provisioning/docker-entrypoint.sh /opt/php-setup/docker-entrypoint.sh
 
-ENV GOSU_VERSION 1.9
+ENV GOSU_VERSION 1.10
 ENV PHP_UID 1000
 ENV PHP_GID 1000
 ENV PHP_HOME /home/php
